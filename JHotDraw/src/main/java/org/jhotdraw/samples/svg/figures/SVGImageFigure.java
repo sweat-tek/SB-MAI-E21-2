@@ -88,23 +88,10 @@ public class SVGImageFigure extends SVGAttributedFigure implements SVGFigure, Im
             if (opacity != 1d) {
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) opacity));
             }
-
             BufferedImage image = getBufferedImage();
+            
             if (image != null) {
-                if (TRANSFORM.get(this) != null) {
-                    // FIXME - We should cache the transformed image.
-                    //         Drawing a transformed image appears to be very slow.
-                    Graphics2D gx = (Graphics2D) g.create();
-                    
-                    // Use same rendering hints like parent graphics
-                    gx.setRenderingHints(g.getRenderingHints());
-                    
-                    gx.transform(TRANSFORM.get(this));
-                    gx.drawImage(image, (int) rectangle.x, (int) rectangle.y, (int) rectangle.width, (int) rectangle.height, null);
-                    gx.dispose();
-                } else {
-                    g.drawImage(image, (int) rectangle.x, (int) rectangle.y, (int) rectangle.width, (int) rectangle.height, null);
-                }
+                transformImage(g, image);
             } else {
                 Shape shape = getTransformedShape();
                 g.setColor(Color.red);
@@ -115,6 +102,19 @@ public class SVGImageFigure extends SVGAttributedFigure implements SVGFigure, Im
             if (opacity != 1d) {
                 g.setComposite(savedComposite);
             }
+        }
+    }
+    
+    private void transformImage(Graphics2D g, BufferedImage image) {
+        if (TRANSFORM.get(this) != null) {
+            Graphics2D gx = (Graphics2D) g.create();
+
+            gx.setRenderingHints(g.getRenderingHints());
+            gx.transform(TRANSFORM.get(this));
+            gx.drawImage(image, (int) rectangle.x, (int) rectangle.y, (int) rectangle.width, (int) rectangle.height, null);
+            gx.dispose();
+        } else {
+            g.drawImage(image, (int) rectangle.x, (int) rectangle.y, (int) rectangle.width, (int) rectangle.height, null);
         }
     }
 
@@ -172,7 +172,7 @@ public class SVGImageFigure extends SVGAttributedFigure implements SVGFigure, Im
     private void invalidateTransformedShape() {
         cachedTransformedShape = null;
         cachedHitShape = null;
-    }
+    }AffineTransform transFormed = TRANSFORM.get(this);
 
     private Shape getTransformedShape() {
         if (cachedTransformedShape == null) {
