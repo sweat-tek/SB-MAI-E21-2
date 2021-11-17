@@ -23,7 +23,7 @@ public abstract class UndoRedoViewAction extends AbstractViewAction {
     
     private static String ID;
     
-    protected PropertyChangeListener redoActionPropertyListener = new PropertyChangeListener() {
+    protected PropertyChangeListener undoRedoActionPropertyListener = new PropertyChangeListener() {
         public void propertyChange(PropertyChangeEvent evt) {
             String name = evt.getPropertyName();
             if (name == AbstractAction.NAME) {
@@ -40,7 +40,7 @@ public abstract class UndoRedoViewAction extends AbstractViewAction {
 
     protected void updateEnabledState() {
         boolean isEnabled = false;
-        Action realRedoAction = getRealRedoAction();
+        Action realRedoAction = getRealUndoRedoAction();
         if (realRedoAction != null) {
             isEnabled = realRedoAction.isEnabled();
         }
@@ -63,7 +63,7 @@ public abstract class UndoRedoViewAction extends AbstractViewAction {
     protected void installViewListeners(View p) {
         super.installViewListeners(p);
         if (p.getAction(ID) != null) {
-            p.getAction(ID).addPropertyChangeListener(redoActionPropertyListener);
+            p.getAction(ID).addPropertyChangeListener(undoRedoActionPropertyListener);
         }
     }
 
@@ -74,17 +74,17 @@ public abstract class UndoRedoViewAction extends AbstractViewAction {
     protected void uninstallViewListeners(View p) {
         super.uninstallViewListeners(p);
         if (p.getAction(ID) != null) {
-            p.getAction(ID).removePropertyChangeListener(redoActionPropertyListener);
+            p.getAction(ID).removePropertyChangeListener(undoRedoActionPropertyListener);
         }
     }
 
     @FeatureEntryPoint(value = JHotDrawFeatures.UNDO_REDO)
     public void actionPerformed(ActionEvent e) {
-        Action realRedoAction = getRealRedoAction();
+        Action realRedoAction = getRealUndoRedoAction();
         if (realRedoAction != null) {
             realRedoAction.actionPerformed(e);
         }
     }
 
-    protected abstract Action getRealRedoAction();
+    protected abstract Action getRealUndoRedoAction();
 }

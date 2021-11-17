@@ -32,7 +32,7 @@ import org.jhotdraw.app.View;
  * <br>1.0 October 9, 2005 Created.
  */
 public class UndoAction extends UndoRedoViewAction {
-    public static final String ID = "edit.undo";
+    private static final String ID = "edit.undo";
     private ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.app.Labels");
     
     
@@ -43,7 +43,7 @@ public class UndoAction extends UndoRedoViewAction {
     }
     
     @Override
-    protected Action getRealRedoAction() {
+    protected Action getRealUndoRedoAction() {
         return (getActiveView() == null) ? null : getActiveView().getAction(ID);
     }
     
