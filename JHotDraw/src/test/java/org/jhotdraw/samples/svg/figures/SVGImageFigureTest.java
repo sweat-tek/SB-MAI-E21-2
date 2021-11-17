@@ -5,6 +5,7 @@
  */
 package org.jhotdraw.samples.svg.figures;
 
+import com.tngtech.jgiven.junit.ScenarioTest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +20,7 @@ import static org.junit.Assert.*;
  *
  * @author benjamin
  */
-public class SVGImageFigureTest {
+public class SVGImageFigureTest extends ScenarioTest<GivenACanvas, WhenInsertingImage, ThenImageIsOnCanvas> {
     
     SVGImageFigure testImage1;
     SVGImageFigure testImage2;
@@ -69,4 +70,12 @@ public class SVGImageFigureTest {
         assertNotNull(testImage2.getBufferedImage());
     }
     
+    @Test
+    public void acceptanceTest() throws IOException {
+        given().aCanvas();
+        
+        when().insertingAnImage();
+        
+        then().imageIsOnCanvas();
+    }
 }
