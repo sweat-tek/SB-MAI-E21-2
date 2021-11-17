@@ -277,7 +277,7 @@ public class DefaultDrawingView
     }
 
     /**
-     * Paints the drawing view.
+     * Paints the drawing view. refactor???? becomes slow if refactored
      * Uses rendering hints for fast painting. Paints the canvasColor, the
      * grid, the drawing, the handles and the current tool.
      */
@@ -286,13 +286,17 @@ public class DefaultDrawingView
         Graphics2D g = (Graphics2D) gr;
 
         // Set rendering hints for speed
+        setRenderingHint(gr);
+        /*
         g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
         g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, (Options.isFractionalMetrics()) ? RenderingHints.VALUE_FRACTIONALMETRICS_ON : RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, (Options.isTextAntialiased()) ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON : RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+     
+        */
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, (Options.isTextAntialiased()) ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON : RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
 
         drawBackground(g);
         drawConstrainer(g);
@@ -302,24 +306,30 @@ public class DefaultDrawingView
     }
 
     /**
-     * Prints the drawing view.
+     * Prints the drawing view. refactor ???
      * Uses high quality rendering hints for printing. Only prints the drawing.
      * Doesn't print the canvasColor, the grid, the handles and the tool.
      */
     @Override
     public void printComponent(Graphics gr) {
-
         Graphics2D g = (Graphics2D) gr;
-
-        // Set rendering hints for quality
+        setRenderingHint(gr);
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        
+        drawDrawing(g);
+    }
+    
+    public void setRenderingHint(Graphics gr) {
+        Graphics2D g = (Graphics2D) gr;
+        
+        // Set rendering hints for quality+speed        
         g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
         g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, (Options.isFractionalMetrics()) ? RenderingHints.VALUE_FRACTIONALMETRICS_ON : RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, (Options.isTextAntialiased()) ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON : RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
-        drawDrawing(g);
+        
     }
 
     protected void drawBackground(Graphics2D g) {
@@ -378,7 +388,7 @@ public class DefaultDrawingView
             }
         }
 
-    /*
+    /* refactor??? outcommented code???
     //Fill canvasColor with alternating colors to debug clipping
     rainbow = (rainbow + 10) % 360;
     g.setColor(
@@ -430,6 +440,7 @@ public class DefaultDrawingView
         }
     }
 
+    //refactor?
     public void setDrawing(Drawing newValue) {
         Drawing oldValue = drawing;
         if (this.drawing != null) {
@@ -1174,6 +1185,7 @@ public class DefaultDrawingView
 
     /**
      * Returns a paint for drawing the background of the drawing area.
+     * This method is responsible for opacity.
      * @return Paint.
      */
     protected Paint getBackgroundPaint(
