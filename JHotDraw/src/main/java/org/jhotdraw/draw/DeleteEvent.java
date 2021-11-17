@@ -7,12 +7,13 @@ import org.jhotdraw.util.ResourceBundleUtil;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import java.util.List;
 
 public class DeleteEvent {
 
     @FeatureEntryPoint(JHotDrawFeatures.BASIC_EDITING)
     public void sendDeleteEvent(DefaultDrawingView defaultDrawingView){
-        final java.util.List<Figure> deletedFigures = defaultDrawingView.getDrawing().sort(defaultDrawingView.getSelectedFigures());
+        final List<Figure> deletedFigures = defaultDrawingView.getDrawing().sort(defaultDrawingView.getSelectedFigures());
 
         // Abort, if not all of the selected figures may be removed from the
         // drawing
