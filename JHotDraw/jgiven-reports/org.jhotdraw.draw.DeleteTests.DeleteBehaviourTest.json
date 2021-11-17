@@ -1,0 +1,227 @@
+{
+  "className": "org.jhotdraw.draw.DeleteTests.DeleteBehaviourTest",
+  "name": "Delete Behaviour",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.draw.DeleteTests.DeleteBehaviourTest",
+      "testMethodName": "selectingAllSimpleFiguresInTheDrawingAndDeletingThemResultsInAllFiguresBeingDeleted",
+      "description": "Selecting all simple figures in the drawing and deleting them results in all figures being deleted",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "some selected bezier figures",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "some selected bezier figures"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 25403200
+            },
+            {
+              "name": "deleting figures",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "deleting figures"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 10554500
+            },
+            {
+              "name": "no figures left in the view",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "no figures left in the view"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1209600
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 420861100
+        }
+      ],
+      "durationInNanos": 420861100,
+      "executionStatus": "SUCCESS"
+    },
+    {
+      "className": "org.jhotdraw.draw.DeleteTests.DeleteBehaviourTest",
+      "testMethodName": "selectingSimpleFiguresAndDeletingThemResultsInJustThoseFiguresBeingDeleted",
+      "description": "Selecting simple figures and deleting them results in just those figures being deleted",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "some selected bezier figures",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "some selected bezier figures"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 374600
+            },
+            {
+              "name": "some unselected bezier figures",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "some unselected bezier figures"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1510300
+            },
+            {
+              "name": "deleting figures",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "deleting figures"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 874000
+            },
+            {
+              "name": "only selected figures are deleted",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "only selected figures are deleted"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1369800
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 7946300
+        }
+      ],
+      "durationInNanos": 7946300,
+      "executionStatus": "SUCCESS"
+    },
+    {
+      "className": "org.jhotdraw.draw.DeleteTests.DeleteBehaviourTest",
+      "testMethodName": "selectingGroupFiguresAndDeletingThemResultsInJustThoseFiguresBeingDeleted",
+      "description": "Selecting group figures and deleting them results in just those figures being deleted",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "a selected group figure",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a selected group figure"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 73100
+            },
+            {
+              "name": "a selected group figure",
+              "words": [
+                {
+                  "value": "and",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a selected group figure"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 976000
+            },
+            {
+              "name": "deleting figures",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "deleting figures"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 896900
+            },
+            {
+              "name": "only selected figures are deleted",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "only selected figures are deleted"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 1054500
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 25240800
+        }
+      ],
+      "durationInNanos": 25240800,
+      "executionStatus": "SUCCESS"
+    }
+  ],
+  "tagMap": {}
+}

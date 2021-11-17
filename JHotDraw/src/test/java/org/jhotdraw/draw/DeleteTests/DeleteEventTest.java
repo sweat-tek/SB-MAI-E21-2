@@ -1,5 +1,6 @@
-package org.jhotdraw.draw;
+package org.jhotdraw.draw.DeleteTests;
 
+import org.jhotdraw.draw.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -8,27 +9,12 @@ public class DeleteEventTest {
     private DefaultDrawingView defaultDrawingView;
     private DrawingEditor editor;
 
-    @BeforeClass
-    public static void setUpClass() {
-
-    }
-
     @Before
     public void setUp(){
         editor = new DefaultDrawingEditor();
         defaultDrawingView = new DefaultDrawingView();
         defaultDrawingView.setDrawing(new QuadTreeDrawing());
         editor.setActiveView(defaultDrawingView);
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-
-    }
-
-    @After
-    public void tearDown() {
-
     }
 
     private void selectFigures() {
@@ -47,7 +33,7 @@ public class DeleteEventTest {
     public void sendDeleteEventShouldDeleteFigures(){
         selectFigures();
 
-        // Assert that we have selected 3 figures
+        // Assert that we have 3 figures in the drawing
         assertEquals(3, editor.getActiveView().getDrawing().getChildCount());
 
         DeleteEvent deleteEvent = new DeleteEvent();
