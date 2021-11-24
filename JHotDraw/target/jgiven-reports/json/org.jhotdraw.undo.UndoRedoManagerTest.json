@@ -1,0 +1,71 @@
+{
+  "className": "org.jhotdraw.undo.UndoRedoManagerTest",
+  "name": "Undo Redo Manager",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.undo.UndoRedoManagerTest",
+      "testMethodName": "undoAcceptanceTest",
+      "description": "Undo acceptance test",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "casesAsTable": false,
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "a rectangle",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a rectangle"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 25221600
+            },
+            {
+              "name": "i undo my action",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "i undo my action"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 426500
+            },
+            {
+              "name": "the rectangle should be gone",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the rectangle should be gone"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 476400
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 186074300
+        }
+      ],
+      "durationInNanos": 186074300,
+      "executionStatus": "SUCCESS"
+    }
+  ],
+  "tagMap": {}
+}
