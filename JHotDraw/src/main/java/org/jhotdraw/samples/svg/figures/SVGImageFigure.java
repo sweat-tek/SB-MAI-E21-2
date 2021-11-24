@@ -79,8 +79,7 @@ public class SVGImageFigure extends SVGAttributedFigure implements SVGFigure, Im
     @Override
     @FeatureEntryPoint(JHotDrawFeatures.IMAGE_TOOL)
     public void draw(Graphics2D g) {
-        //super.draw(g);
-
+        
         double opacity = OPACITY.get(this);
         opacity = Math.min(Math.max(0d, opacity), 1d);
         if (opacity != 0d) {
@@ -91,7 +90,7 @@ public class SVGImageFigure extends SVGAttributedFigure implements SVGFigure, Im
             BufferedImage image = getBufferedImage();
             
             if (image != null) {
-                transformImage(g, image);
+                drawTransformedImage(g, image);
             } else {
                 Shape shape = getTransformedShape();
                 g.setColor(Color.red);
@@ -105,7 +104,7 @@ public class SVGImageFigure extends SVGAttributedFigure implements SVGFigure, Im
         }
     }
     
-    private void transformImage(Graphics2D g, BufferedImage image) {
+    private void drawTransformedImage(Graphics2D g, BufferedImage image) {
         if (TRANSFORM.get(this) != null) {
             Graphics2D gx = (Graphics2D) g.create();
 
