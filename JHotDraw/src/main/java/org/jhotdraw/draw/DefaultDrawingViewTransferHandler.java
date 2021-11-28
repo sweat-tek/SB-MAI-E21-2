@@ -5,11 +5,11 @@
  * and all its contributors.
  * All rights reserved.
  *
- * The copyright of this software is owned by the authors and  
- * contributors of the JHotDraw project ("the copyright holders").  
- * You may not use, copy or modify this software, except in  
- * accordance with the license agreement you entered into with  
- * the copyright holders. For details see accompanying license terms. 
+ * The copyright of this software is owned by the authors and
+ * contributors of the JHotDraw project ("the copyright holders").
+ * You may not use, copy or modify this software, except in
+ * accordance with the license agreement you entered into with
+ * the copyright holders. For details see accompanying license terms.
  */
 package org.jhotdraw.draw;
 
@@ -25,8 +25,6 @@ import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 import java.awt.event.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -49,10 +47,10 @@ import org.jhotdraw.util.ReversedList;
  * @version 2.0 2009-03-13 Load drawings from files using a worker thread.
  * <br>1.2 2008-05-24 Adapted to changes in InputFormat. Add support for
  * automatically grouping
- * <br>1.1.2 2008-03-20 After import, only select imported figures in 
- * drawing view. 
+ * <br>1.1.2 2008-03-20 After import, only select imported figures in
+ * drawing view.
  * <br>1.1.1 2008-03-10 In method importData, figures are added to drawing
- * by the InputFormat. 
+ * by the InputFormat.
  * <br>1.1 2007-12-16 Adapted to changes in InputFormat and OutputFormat.
  * <br>1.0 April 13, 2007 Created.
  */
@@ -258,36 +256,57 @@ public class DefaultDrawingViewTransferHandler extends TransferHandler {
         Transferable retValue;
         Drawing drawing = view.getDrawing();
 
-        if (drawing.getOutputFormats() == null ||
-                drawing.getOutputFormats().size() == 0) {
+        if (!hasOutputFormats(drawing)) {
             retValue = null;
         } else {
-            java.util.List<Figure> toBeCopied = drawing.sort(transferFigures);
-            if (toBeCopied.size() > 0) {
-                try {
-                    CompositeTransferable transfer = new CompositeTransferable();
-                    for (OutputFormat format : drawing.getOutputFormats()) {
-                        Transferable t = format.createTransferable(
-                                drawing,
-                                toBeCopied,
-                                view.getScaleFactor());
-                        if (!transfer.isDataFlavorSupported(t.getTransferDataFlavors()[0])) {
-                            transfer.add(t);
-                        }
-                    }
-                    retValue = transfer;
-                } catch (IOException e) {
-                    if (DEBUG) {
-                        e.printStackTrace();
-                    }
-                    retValue = null;
-                }
-            } else {
-                retValue = null;
-            }
+            retValue = getTransferableIfAnyToCopy(view, transferFigures, drawing);
         }
 
         return retValue;
+    }
+
+    private Transferable getTransferableIfAnyToCopy(DrawingView view, Set<Figure> transferFigures, Drawing drawing) {
+        java.util.List<Figure> toBeCopied = drawing.sort(transferFigures);
+
+        boolean anyToBeCopied = toBeCopied.size() > 0;
+        if (anyToBeCopied) {
+            return getTransferable(view, drawing, toBeCopied);
+        } else {
+            return null;
+        }
+    }
+
+    private Transferable getTransferable(DrawingView view, Drawing drawing, java.util.List<Figure> toBeCopied) {
+        Transferable retValue;
+
+        try {
+            retValue = getCompositeTransferable(view, drawing, toBeCopied);
+
+        } catch (IOException e) {
+            if (DEBUG) {
+                e.printStackTrace();
+            }
+            retValue = null;
+        }
+        return retValue;
+    }
+
+    private CompositeTransferable getCompositeTransferable(DrawingView view, Drawing drawing, java.util.List<Figure> toBeCopied) throws IOException {
+        CompositeTransferable transfer = new CompositeTransferable();
+        for (OutputFormat format : drawing.getOutputFormats()) {
+            Transferable t = format.createTransferable(
+                    drawing,
+                    toBeCopied,
+                    view.getScaleFactor());
+            if (!transfer.isDataFlavorSupported(t.getTransferDataFlavors()[0])) {
+                transfer.add(t);
+            }
+        }
+        return transfer;
+    }
+
+    private boolean hasOutputFormats(Drawing drawing) {
+        return !(drawing.getOutputFormats() == null || drawing.getOutputFormats().size() == 0);
     }
 
     @Override
@@ -312,7 +331,7 @@ public class DefaultDrawingViewTransferHandler extends TransferHandler {
                     }
                 }
 
-               // view.clearSelection();
+                // view.clearSelection();
                 CompositeFigureListener removeListener = new CompositeFigureListener() {
 
                     public void areaInvalidated(CompositeFigureEvent e) {
@@ -397,7 +416,7 @@ public class DefaultDrawingViewTransferHandler extends TransferHandler {
                     createTransferable(view, transferFigures), imageOffset));
             recognizer.gestured(comp, me, srcActions, action);
 
-        // XXX - What kind of drag gesture can we support for this??
+            // XXX - What kind of drag gesture can we support for this??
         } else {
             super.exportAsDrag(comp, e, action);
         }
