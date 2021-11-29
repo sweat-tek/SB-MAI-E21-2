@@ -77,7 +77,7 @@ public class SVGTextFigure
     }
 
     @FeatureEntryPoint(JHotDrawFeatures.TEXT_TOOL)
-    protected void drawStroke(Graphics2D g) {
+    public void drawStroke(Graphics2D g) {
         g.draw(getTextShape());
     }
     

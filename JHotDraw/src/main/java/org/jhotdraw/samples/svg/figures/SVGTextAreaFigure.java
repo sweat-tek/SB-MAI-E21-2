@@ -75,7 +75,7 @@ public class SVGTextAreaFigure extends SVGAttributedFigure
     }
 
     @FeatureEntryPoint(JHotDrawFeatures.TEXT_AREA_TOOL)
-    protected void drawStroke(Graphics2D g) {
+    public void drawStroke(Graphics2D g) {
         g.draw(getTextShape());
     }
     // SHAPE AND BOUNDS

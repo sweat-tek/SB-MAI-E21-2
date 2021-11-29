@@ -27,6 +27,6 @@ public interface FigureDraw {
      */
     void drawStroke(Graphics2D g);
 
-     void drawText(Graphics2D g);
+    default void drawText(Graphics2D g){}
 
 }

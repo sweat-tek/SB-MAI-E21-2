@@ -251,12 +251,12 @@ public class DefaultDrawing
     }
 
     @Override
-    protected void drawFill(Graphics2D g) {
+    public void drawFill(Graphics2D g) {
         //  throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    protected void drawStroke(Graphics2D g) {
+    public void drawStroke(Graphics2D g) {
         //  throw new UnsupportedOperationException("Not supported yet.");
     }
 }

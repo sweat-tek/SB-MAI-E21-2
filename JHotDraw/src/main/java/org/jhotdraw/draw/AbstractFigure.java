@@ -215,7 +215,7 @@ public abstract class AbstractFigure
 
             // Lazily create the event:
             if (event == null) event = eventSupplier.get();
-            var listener = (FigureListener) listeners[i + 1];
+            FigureListener listener = (FigureListener) listeners[i + 1];
 
             // Execute the event
             eventHandler.accept(listener, event);
