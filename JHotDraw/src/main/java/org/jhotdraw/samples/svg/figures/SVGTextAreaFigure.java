@@ -65,16 +65,17 @@ public class SVGTextAreaFigure extends SVGAttributedFigure
     // DRAWING
 
     @Override
-    protected void drawText(java.awt.Graphics2D g) {
+    public void drawText(Graphics2D g) {
     }
 
-    protected void drawFill(Graphics2D g) {
+    @Override
+    public void drawFill(Graphics2D g) {
         g.fill(getTextShape());
         g.draw(new Rectangle2D.Double(getBounds().x, getBounds().y, getPreferredTextSize(changingDepth).width, getPreferredTextSize(changingDepth).height));
     }
 
     @FeatureEntryPoint(JHotDrawFeatures.TEXT_AREA_TOOL)
-    protected void drawStroke(Graphics2D g) {
+    public void drawStroke(Graphics2D g) {
         g.draw(getTextShape());
     }
     // SHAPE AND BOUNDS
