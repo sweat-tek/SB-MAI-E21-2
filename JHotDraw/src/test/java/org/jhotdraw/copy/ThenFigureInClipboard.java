@@ -33,7 +33,7 @@ public class ThenFigureInClipboard extends Stage<ThenFigureInClipboard> {
         }
     }
 
-    ThenFigureInClipboard theSelectedFigureShouldBeInTheClipboard() {
+    ThenFigureInClipboard theSelectedFigureShouldBeInMyClipboard() {
         DrawingView drawingView = editor.getActiveView();
         DefaultDrawingView component = (DefaultDrawingView) drawingView.getComponent();
         Toolkit toolkit = component.getToolkit();

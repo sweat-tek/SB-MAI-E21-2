@@ -11,6 +11,6 @@ public class CopyBehaviorTest extends ScenarioTest<GivenSelectedFigure, WhenCopy
 
         when().iCopy();
 
-        then().theSelectedFigureShouldBeInTheClipboard();
+        then().theSelectedFigureShouldBeInMyClipboard();
     }
 }

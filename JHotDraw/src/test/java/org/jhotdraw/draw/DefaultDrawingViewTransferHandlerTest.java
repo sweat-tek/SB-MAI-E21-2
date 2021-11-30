@@ -1,5 +1,6 @@
 package org.jhotdraw.draw;
 
+import org.jhotdraw.samples.svg.figures.SVGEllipseFigure;
 import org.jhotdraw.samples.svg.io.ImageMapOutputFormat;
 import org.jhotdraw.samples.svg.io.SVGOutputFormat;
 import org.jhotdraw.samples.svg.io.SVGZOutputFormat;
@@ -16,6 +17,7 @@ public class DefaultDrawingViewTransferHandlerTest {
 
     private DefaultDrawingEditor editor;
     private DrawingView view;
+    private DefaultDrawingViewTransferHandler transferHandler;
 
     @Before
     public void setUp() {
@@ -23,43 +25,40 @@ public class DefaultDrawingViewTransferHandlerTest {
         view = new DefaultDrawingView();
         view.setDrawing(new QuadTreeDrawing());
         editor.setActiveView(view);
+        transferHandler = new DefaultDrawingViewTransferHandler();
     }
 
     @Test
     public void createTransferable() {
-        DefaultDrawingViewTransferHandler transferHandler = new DefaultDrawingViewTransferHandler();
 
         // Add figure to drawing and select it
-        Figure f1 = new BezierFigure();
+        Figure f1 = new SVGEllipseFigure();
         view.getDrawing().add(f1);
         view.addToSelection(f1);
 
         Set<Figure> selectedFigures = view.getSelectedFigures();
 
         // Should be null if it does not have output formats
-        List<OutputFormat> outputFormats1 = view.getDrawing().getOutputFormats();
-        Assert.assertTrue("Drawing should have no output formats", outputFormats1.isEmpty());
+        view.getDrawing().setOutputFormats(Collections.emptyList());    // Remove any output formats
         Transferable transferable = transferHandler.createTransferable(view, selectedFigures);
         Assert.assertNull("Transferable should be null it it doest not have output formats", transferable);
 
-        setupUpOutputFormats(view.getDrawing());
-
-        // Should return null if there is no elements in the drawing
-        HashSet<Figure> emptySet = new HashSet<>();
-        transferable = transferHandler.createTransferable(view, emptySet);
-        Assert.assertNull("Transferable should be null if there is no elements selected", transferable);
-
         // Should NOT be null if it does have output formats
-        List<OutputFormat> outputFormats2 = view.getDrawing().getOutputFormats();
-        Assert.assertFalse("Drawing should have output formats", outputFormats2.isEmpty());
+        setupUpOutputFormats(view.getDrawing());    // Now fill it with output formats
         transferable = transferHandler.createTransferable(view, selectedFigures);
         Assert.assertNotNull("Transferable should NOT be null if it has output formats",
                 transferable);
 
+        // Should return null if there is no elements in the drawing
+        transferable = transferHandler.createTransferable(view, Collections.emptySet());
+        Assert.assertNull("Transferable should be null if there is no elements selected", transferable);
+
+        transferable = transferHandler.createTransferable(view, selectedFigures);   // Get a transferable
+
         // Transferable should not have duplicate data flavors
         DataFlavor[] transferDataFlavors = transferable.getTransferDataFlavors();
-        HashSet<DataFlavor>dataFlavorSet = new HashSet<>(Arrays.asList(transferDataFlavors));
-        Assert.assertEquals("Transferable should not contain duplicate data flavors", dataFlavorSet.size(), transferDataFlavors.length);
+        HashSet<DataFlavor> noDuplicates = new HashSet<>(Arrays.asList(transferDataFlavors));   // Remove duplicates if any
+        Assert.assertEquals("Transferable should not contain duplicate data flavors", noDuplicates.size(), transferDataFlavors.length);
     }
 
     void setupUpOutputFormats(Drawing drawing) {
