@@ -18,17 +18,9 @@ class ThenImageIsOnCanvas extends Stage<ThenImageIsOnCanvas> {
     private DrawingEditor editor;
 
     @ExpectedScenarioState
-    private Set<Figure> selectedFigures;
-
-    @ExpectedScenarioState
-    private Set<Figure> nonselectedFigures;
-
-    @ExpectedScenarioState
     private SVGImageFigure imageFigure;
 
     ThenImageIsOnCanvas imageIsOnCanvas() {
-        
-        
         
         assertCanvasContains(imageFigure, editor.getActiveView().getDrawing().getChildren());
         return this;
@@ -36,17 +28,14 @@ class ThenImageIsOnCanvas extends Stage<ThenImageIsOnCanvas> {
 
     private void assertCanvasContains(Figure figure, List<Figure> canvasFigures) {
         assertTrue(figure instanceof SVGFigure);
-        SVGImageFigure newFigure = null;
         
         for (Figure actualFigure : canvasFigures) {
             System.out.println(actualFigure);
             if (actualFigure == figure) {
-                newFigure = (SVGImageFigure)actualFigure;
+                assertEquals(actualFigure,figure);
             }
         }
-        System.out.println(figure);
-        System.out.println(newFigure);
         
-        assertEquals(newFigure,figure);
+        
     }
 }
