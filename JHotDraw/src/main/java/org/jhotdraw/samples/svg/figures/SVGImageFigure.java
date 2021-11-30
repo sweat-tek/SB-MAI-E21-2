@@ -89,31 +89,31 @@ public class SVGImageFigure extends SVGAttributedFigure implements SVGFigure, Im
             }
             BufferedImage image = getBufferedImage();
             
-            if (image != null) {
-                drawTransformedImage(g, image);
-            } else {
-                Shape shape = getTransformedShape();
-                g.setColor(Color.red);
-                g.setStroke(new BasicStroke());
-                g.draw(shape);
-            }
-
+            drawImage(g, image);
+            
             if (opacity != 1d) {
                 g.setComposite(savedComposite);
             }
         }
     }
     
-    private void drawTransformedImage(Graphics2D g, BufferedImage image) {
-        if (TRANSFORM.get(this) != null) {
-            Graphics2D gx = (Graphics2D) g.create();
+    private void drawImage(Graphics2D g, BufferedImage image) {
+        if (image != null) {
+            if (TRANSFORM.get(this) != null) {
+                Graphics2D gx = (Graphics2D) g.create();
 
-            gx.setRenderingHints(g.getRenderingHints());
-            gx.transform(TRANSFORM.get(this));
-            gx.drawImage(image, (int) rectangle.x, (int) rectangle.y, (int) rectangle.width, (int) rectangle.height, null);
-            gx.dispose();
+                gx.setRenderingHints(g.getRenderingHints());
+                gx.transform(TRANSFORM.get(this));
+                gx.drawImage(image, (int) rectangle.x, (int) rectangle.y, (int) rectangle.width, (int) rectangle.height, null);
+                gx.dispose();
+            } else {
+                g.drawImage(image, (int) rectangle.x, (int) rectangle.y, (int) rectangle.width, (int) rectangle.height, null);
+            }
         } else {
-            g.drawImage(image, (int) rectangle.x, (int) rectangle.y, (int) rectangle.width, (int) rectangle.height, null);
+            Shape shape = getTransformedShape();
+            g.setColor(Color.red);
+            g.setStroke(new BasicStroke());
+            g.draw(shape);
         }
     }
 

@@ -47,7 +47,7 @@ public class SVGImageFigureTest extends ScenarioTest<GivenACanvas, WhenInserting
     }
     
     @Test
-    public void testImage() {
+    public void testCloneImage() {
         
         SVGImageFigure cloneImg = testImage1.clone();
         
