@@ -3,5 +3,6 @@
 .target/
 
 JHotDraw/JHotDraw.iml
-/JHotDraw/nbproject/
-/JHotDraw/target/
+/JHotDraw/nbproject
+/JHotDraw/target
+/JHotDraw/.idea
