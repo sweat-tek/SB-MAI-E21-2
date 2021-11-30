@@ -117,11 +117,11 @@ public class SVGImageFigure extends SVGAttributedFigure implements SVGFigure, Im
         }
     }
 
-    protected void drawFill(Graphics2D g) {
+    public void drawFill(Graphics2D g) {
 
     }
 
-    protected void drawStroke(Graphics2D g) {
+    public void drawStroke(Graphics2D g) {
 
     }
 

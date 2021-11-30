@@ -21,6 +21,9 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.beans.*;
 import java.util.*;
+
+import org.jhotdraw.draw.DefaultDrawingView;
+import org.jhotdraw.draw.DeleteEvent;
 import org.jhotdraw.util.*;
 import org.jhotdraw.app.EditableComponent;
 import org.jhotdraw.app.JHotDrawFeatures;
@@ -47,8 +50,10 @@ public class DeleteAction extends TextAction {
         Component focusOwner = KeyboardFocusManager.
                 getCurrentKeyboardFocusManager().
                 getPermanentFocusOwner();
-        if (focusOwner != null && focusOwner instanceof EditableComponent) {
-            ((EditableComponent) focusOwner).delete();
+        if (focusOwner instanceof EditableComponent) {
+            DefaultDrawingView defaultDrawingView = (DefaultDrawingView) focusOwner;
+            DeleteEvent deleteEvent = new DeleteEvent();
+            deleteEvent.sendDeleteEvent(defaultDrawingView);
         } else {
             deleteNextChar(evt);
         }
@@ -72,7 +77,9 @@ public class DeleteAction extends TextAction {
                     doc.remove(dot, 1);
                     beep = false;
                 }
-            } catch (BadLocationException bl) {}
+            } catch (BadLocationException bl) {
+                bl.printStackTrace();
+            }
         }
         if (beep) {
             Toolkit.getDefaultToolkit().beep();

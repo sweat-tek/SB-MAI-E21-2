@@ -30,10 +30,6 @@ package org.jhotdraw.app;
 
 public interface EditableComponent {
 	/**
-	 * Deletes the component at (or after) the caret position.
-	 */
-	public void delete();
-	/**
 	 * Duplicates the selected region.
 	 */
 	public void duplicate();
