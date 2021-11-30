@@ -1,8 +1,4 @@
-
-.idea/
-.target/
-
-JHotDraw/JHotDraw.iml
-/JHotDraw/nbproject
-/JHotDraw/target
-/JHotDraw/.idea
+JHotDraw/.DS_Store
+JHotDraw/.idea/
+JHotDraw/nbproject/
+JHotDraw/target/
