@@ -32,7 +32,6 @@ public class GivenSelectedFigure extends Stage<GivenSelectedFigure> {
     }
 
     GivenSelectedFigure aSelectedFigure() {
-        // Figure f1 = new BezierFigure();
         Figure f1 = new SVGEllipseFigure(0,0,100,100);
         editor.getActiveView().getDrawing().add(f1);
         editor.getActiveView().addToSelection(f1);

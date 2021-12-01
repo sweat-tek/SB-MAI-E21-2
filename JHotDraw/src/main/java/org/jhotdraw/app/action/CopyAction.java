@@ -48,13 +48,13 @@ public class CopyAction extends AbstractAction {
         copy(focusOwner);
     }
 
-    public void copy(Component componentCopy) {
-        if (componentCopy instanceof JComponent) {
-            JComponent component = (JComponent) componentCopy;
-            TransferHandler transferHandler = component.getTransferHandler();
-            Clipboard systemClipboard = component.getToolkit().getSystemClipboard();
+    public void copy(Component component) {
+        if (component instanceof JComponent) {
+            JComponent jComponent = (JComponent) component;
+            TransferHandler transferHandler = jComponent.getTransferHandler();
+            Clipboard systemClipboard = jComponent.getToolkit().getSystemClipboard();
             transferHandler.exportToClipboard(
-                    component,
+                    jComponent,
                     systemClipboard,
                     TransferHandler.COPY
             );
