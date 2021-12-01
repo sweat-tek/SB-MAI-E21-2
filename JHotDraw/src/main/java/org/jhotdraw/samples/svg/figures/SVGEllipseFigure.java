@@ -58,14 +58,16 @@ public class SVGEllipseFigure extends SVGAttributedFigure implements SVGFigure {
     }
 
     // DRAWING
-    protected void drawFill(Graphics2D g) {
+    @Override
+    public void drawFill(Graphics2D g) {
         if (ellipse.width > 0 && ellipse.height > 0) {
             g.fill(ellipse);
         }
     }
 
     @FeatureEntryPoint(JHotDrawFeatures.ELLIPSE_TOOL)
-    protected void drawStroke(Graphics2D g) {
+    @Override
+    public void drawStroke(Graphics2D g) {
         if (ellipse.width > 0 && ellipse.height > 0) {
             g.draw(ellipse);
         }
@@ -88,6 +90,7 @@ public class SVGEllipseFigure extends SVGAttributedFigure implements SVGFigure {
         return ellipse.getHeight();
     }
 
+    @Override
     public Rectangle2D.Double getBounds() {
         return (Rectangle2D.Double) ellipse.getBounds2D();
     }
@@ -110,6 +113,7 @@ public class SVGEllipseFigure extends SVGAttributedFigure implements SVGFigure {
 
     /**
      * Checks if a Point2D.Double is inside the figure.
+     * @param p
      */
     public boolean contains(Point2D.Double p) {
         return getHitShape().contains(p);
@@ -152,6 +156,7 @@ public class SVGEllipseFigure extends SVGAttributedFigure implements SVGFigure {
      *
      * @param tx the transformation.
      */
+    @Override
     public void transform(AffineTransform tx) {
         if (TRANSFORM.get(this) != null ||
                 (tx.getType() & (AffineTransform.TYPE_TRANSLATION)) != tx.getType()) {
