@@ -3,29 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.jhotdraw.samples.svg.figures;
+package org.jhotdraw.samples.svg.figures.given;
 
 import com.tngtech.jgiven.Stage;
-import com.tngtech.jgiven.annotation.BeforeStage;
-import com.tngtech.jgiven.annotation.ExpectedScenarioState;
 import com.tngtech.jgiven.annotation.ProvidedScenarioState;
 import org.jhotdraw.draw.DefaultDrawingEditor;
 import org.jhotdraw.draw.DefaultDrawingView;
+import org.jhotdraw.draw.DrawingView;
+import org.jhotdraw.draw.QuadTreeDrawing;
 
 /**
  *
  * @author nicol
  */
-public class WhenAddingRectangleWithCoordinates extends Stage<WhenAddingRectangleWithCoordinates>{
+public class GivenEmptyCanvas extends Stage<GivenEmptyCanvas>{
     
-    @ExpectedScenarioState
     @ProvidedScenarioState
     DefaultDrawingEditor editor;
     
-    WhenAddingRectangleWithCoordinates addingRectangleToCanvas(){
-        SVGRectFigure rectangle = new SVGRectFigure();
-        editor.getActiveView().getDrawing().add(rectangle);
+    public GivenEmptyCanvas anEmptyCanvas(){
+        DrawingView drawingView = new DefaultDrawingView();
+        editor = new DefaultDrawingEditor();
+        drawingView.setDrawing(new QuadTreeDrawing());
+        editor.setActiveView(drawingView);
         return this;
     }
-    
 }
