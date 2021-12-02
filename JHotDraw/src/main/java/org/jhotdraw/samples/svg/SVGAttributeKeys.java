@@ -129,12 +129,11 @@ public class SVGAttributeKeys extends AttributeKeys {
             return FILL_GRADIENT.get(f).getPaint(f, opacity);
         }
         Color color = FILL_COLOR.get(f);
-        if (color != null) {
-            if (opacity != 1) {
-                color = new Color(
-                        (color.getRGB() & 0xffffff) | (int) (opacity * 255) << 24,
-                        true);
-            }
+        //Refactored if statement
+        if (opacity != 1) {
+            color = new Color(
+                    (color.getRGB() & 0xffffff) | (int) (opacity * 255) << 24,
+                    true);
         }
         return color;
     }
@@ -149,12 +148,11 @@ public class SVGAttributeKeys extends AttributeKeys {
             return STROKE_GRADIENT.get(f).getPaint(f, opacity);
         }
         Color color = STROKE_COLOR.get(f);
-        if (color != null) {
-            if (opacity != 1) {
-                color = new Color(
-                        (color.getRGB() & 0xffffff) | (int) (opacity * 255) << 24,
-                        true);
-            }
+        //Refactored if statement
+        if (opacity != 1) {
+            color = new Color(
+                    (color.getRGB() & 0xffffff) | (int) (opacity * 255) << 24,
+                    true);
         }
         return color;
     }
