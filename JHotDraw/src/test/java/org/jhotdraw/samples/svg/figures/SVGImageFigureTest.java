@@ -9,6 +9,10 @@ import com.tngtech.jgiven.junit.ScenarioTest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
+import org.jhotdraw.samples.svg.figures.given.GivenACanvas;
+import org.jhotdraw.samples.svg.figures.then.ThenImageIsOnCanvas;
+import org.jhotdraw.samples.svg.figures.when.WhenInsertingImage;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -5,6 +5,9 @@
  */
 package org.jhotdraw.samples.svg.figures;
 
+import org.jhotdraw.samples.svg.figures.given.GivenEmptyCanvas;
+import org.jhotdraw.samples.svg.figures.then.ThenRectangleOnCanvas;
+import org.jhotdraw.samples.svg.figures.when.WhenAddingRectangleWithCoordinates;
 import org.junit.Test;
 import com.tngtech.jgiven.junit.ScenarioTest;
 
@@ -17,8 +20,8 @@ public class AddingRectangleToCanvasTest extends ScenarioTest<GivenEmptyCanvas, 
     @Test
     public void addingRectangleToEmptyCanvas(){
         given().anEmptyCanvas();
-        when().addingRectangleToCanvas();
-        then().rectangleIsOnCanvas();
+        when().addingFiguresToCanvas();
+        then().figureIsOnCanvas();
     }
     
 }

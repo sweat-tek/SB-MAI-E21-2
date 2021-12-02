@@ -1,15 +1,11 @@
-package org.jhotdraw.samples.svg.figures;
+package org.jhotdraw.samples.svg.figures.given;
 
-import org.jhotdraw.draw.action.*;
 import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.BeforeStage;
 import com.tngtech.jgiven.annotation.ProvidedScenarioState;
-import java.io.File;
-import java.net.URL;
 import org.jhotdraw.draw.*;
-import org.jhotdraw.samples.svg.figures.SVGGroupFigure;
 
-class GivenACanvas extends Stage<GivenACanvas> {
+public class GivenACanvas extends Stage<GivenACanvas> {
 
     @ProvidedScenarioState
     private DrawingEditor editor;
@@ -19,7 +15,7 @@ class GivenACanvas extends Stage<GivenACanvas> {
       
     }
 
-    GivenACanvas aCanvas() {
+    public GivenACanvas aCanvas() {
         editor = new DefaultDrawingEditor();
         DrawingView view = new DefaultDrawingView();
         view.setDrawing(new QuadTreeDrawing());
