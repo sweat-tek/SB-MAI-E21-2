@@ -285,16 +285,9 @@ public class DefaultDrawingView
     public void paintComponent(Graphics gr) {
         Graphics2D g = (Graphics2D) gr;
 
-        // Set rendering hints for speed
+        // Set shared rendering hints 
         setRenderingHint(gr);
-        /*
-        g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
-        g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, (Options.isFractionalMetrics()) ? RenderingHints.VALUE_FRACTIONALMETRICS_ON : RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, (Options.isTextAntialiased()) ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON : RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
-     
-        */
+        // Set rendering hints for speed
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
 
@@ -313,7 +306,9 @@ public class DefaultDrawingView
     @Override
     public void printComponent(Graphics gr) {
         Graphics2D g = (Graphics2D) gr;
+        // Set shared rendering hints 
         setRenderingHint(gr);
+        // Set rendering hints for quality
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
@@ -323,13 +318,12 @@ public class DefaultDrawingView
     public void setRenderingHint(Graphics gr) {
         Graphics2D g = (Graphics2D) gr;
         
-        // Set rendering hints for quality+speed        
+        // Set shared rendering hints for quality+speed        
         g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
         g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, (Options.isFractionalMetrics()) ? RenderingHints.VALUE_FRACTIONALMETRICS_ON : RenderingHints.VALUE_FRACTIONALMETRICS_OFF);
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, (Options.isTextAntialiased()) ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON : RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
-        
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, (Options.isTextAntialiased()) ? RenderingHints.VALUE_TEXT_ANTIALIAS_ON : RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);   
     }
 
     protected void drawBackground(Graphics2D g) {
@@ -387,15 +381,7 @@ public class DefaultDrawingView
                 }
             }
         }
-
-    /* refactor??? outcommented code???
-    //Fill canvasColor with alternating colors to debug clipping
-    rainbow = (rainbow + 10) % 360;
-    g.setColor(
-    new Color(Color.HSBtoRGB((float) (rainbow / 360f), 0.3f, 1.0f)));
-    g.fill(g.getClipBounds());*/
     }
-    //int rainbow;
 
     protected void drawConstrainer(Graphics2D g) {
         getConstrainer().draw(g, this);
@@ -718,7 +704,6 @@ public class DefaultDrawingView
                 repaint(invalidatedArea);
             }
         }
-
     }
 
     /**
@@ -760,7 +745,6 @@ public class DefaultDrawingView
             }
         }
         return compatibleHandles;
-
     }
 
     /**
@@ -998,7 +982,6 @@ public class DefaultDrawingView
         for (Handle handle : secondaryHandles) {
             handle.viewTransformChanged();
         }
-
     }
 
     public void setHandleDetailLevel(int newValue) {
@@ -1007,10 +990,7 @@ public class DefaultDrawingView
             invalidateHandles();
 
             validateHandles();
-
         }
-
-
     }
 
     public int getHandleDetailLevel() {
@@ -1035,10 +1015,7 @@ public class DefaultDrawingView
             if (!f.isRemovable()) {
                 getToolkit().beep();
                 return;
-
             }
-
-
         }
 
         // Get z-indices of deleted figures
