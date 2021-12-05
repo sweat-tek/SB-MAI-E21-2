@@ -29,7 +29,7 @@ public class ThenUserSeesUpdatedCanvasColor extends Stage<ThenUserSeesUpdatedCan
     view.setDrawing(new QuadTreeDrawing());
     }
     
-    ThenUserSeesUpdatedCanvasColor TheUserCanEditTheCanvas() {
+    ThenUserSeesUpdatedCanvasColor theUserCanEditTheCanvas() {
     String result = "color";
     String result2 = "color";
     

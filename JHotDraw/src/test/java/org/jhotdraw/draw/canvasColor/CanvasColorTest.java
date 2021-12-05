@@ -16,7 +16,7 @@ public class CanvasColorTest extends ScenarioTest<GivenCanvas, WhenCanvasChangeC
         @Test
         public void changingCanvasColor() {
         given().drawingTheCanvas();
-        when().AUserChangesCanvasColor();
-        then().TheUserCanEditTheCanvas();
+        when().aUserChangesCanvasColor();
+        then().theUserCanEditTheCanvas();
     }
 }
