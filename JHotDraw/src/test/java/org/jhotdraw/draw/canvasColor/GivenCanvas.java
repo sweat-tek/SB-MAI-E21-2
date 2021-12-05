@@ -3,33 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.jhotdraw.samples.svg.figures;
+package org.jhotdraw.draw.canvasColor;
 
 import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.BeforeStage;
 import com.tngtech.jgiven.annotation.ProvidedScenarioState;
-import com.tngtech.jgiven.junit.ScenarioTest;
-import java.awt.Canvas;
 import org.jhotdraw.draw.DefaultDrawingEditor;
 import org.jhotdraw.draw.DefaultDrawingView;
+import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.QuadTreeDrawing;
-import org.junit.Test;
 
 /**
  *
- * @author nicol
  */
-public class GivenEmptyCanvas extends Stage<GivenEmptyCanvas>{
+public class GivenCanvas extends Stage<GivenCanvas> {
+            @ProvidedScenarioState
+    private DrawingEditor canvas;
     
-    @ProvidedScenarioState
-    DefaultDrawingEditor editor;
-    
-    GivenEmptyCanvas anEmptyCanvas(){
-        DrawingView drawingView = new DefaultDrawingView();
-        editor = new DefaultDrawingEditor();
-        drawingView.setDrawing(new QuadTreeDrawing());
-        editor.setActiveView(drawingView);
-        return this;
+            @BeforeStage
+    private void before() {
+    canvas = new DefaultDrawingEditor();
+    DrawingView view = new DefaultDrawingView();
+    view.setDrawing(new QuadTreeDrawing());
+    canvas.setActiveView(view);
     }
+    
+    GivenCanvas drawingTheCanvas() {
+        canvas.getActiveView();
+        return this;
+} 
 }
