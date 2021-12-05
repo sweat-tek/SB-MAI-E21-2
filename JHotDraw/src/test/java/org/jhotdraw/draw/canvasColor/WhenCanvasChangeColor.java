@@ -43,7 +43,7 @@ public class WhenCanvasChangeColor extends Stage<WhenCanvasChangeColor> {
         
     WhenCanvasChangeColor AUserChangesCanvasColor() {
     Color canvasColor;
-    canvasColor = CANVAS_FILL_COLOR.get(drawing);
+    //canvasColor = CANVAS_FILL_COLOR.get(drawing);
         return this;
 }    
 }

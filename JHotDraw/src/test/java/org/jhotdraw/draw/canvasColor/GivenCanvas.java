@@ -29,7 +29,7 @@ public class GivenCanvas extends Stage<GivenCanvas> {
     canvas.setActiveView(view);
     }
     
-    GivenCanvas Drawing_View() {
+    GivenCanvas drawingTheCanvas() {
         canvas.getActiveView();
         return this;
 } 
