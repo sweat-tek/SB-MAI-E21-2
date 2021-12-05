@@ -14,6 +14,7 @@
 
 package org.jhotdraw.draw;
 
+import java.awt.*;
 import java.awt.geom.*;
 import org.jhotdraw.geom.*;
 /**
@@ -31,7 +32,12 @@ public class GroupFigure extends AbstractCompositeFigure {
     public boolean canConnect() {
         return true;
     }
-    
+
+    @Override
+    public void drawFigure(Graphics2D d) {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * This is a default implementation that chops the point at the rectangle
      * returned by getBounds() of the figure.

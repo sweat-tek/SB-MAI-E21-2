@@ -475,6 +475,12 @@ public class BezierFigure extends AbstractAttributedFigure {
     public Point2D.Double getStartPoint() {
         return getPoint(0, 0);
     }
+
+    @Override
+    public void drawFigure(Graphics2D d) {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * Convenience method for getting the end point.
      */
