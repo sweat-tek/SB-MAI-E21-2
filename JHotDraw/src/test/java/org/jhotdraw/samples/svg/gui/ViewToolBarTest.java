@@ -24,4 +24,5 @@ public class ViewToolBarTest {
         }
         Assert.fail();
     }
+
 }
