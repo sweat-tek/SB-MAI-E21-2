@@ -3,38 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.jhotdraw.draw.action;
+package org.jhotdraw.draw.canvasColor;
 
 import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.BeforeStage;
+import com.tngtech.jgiven.annotation.ProvidedScenarioState;
+import org.jhotdraw.draw.DefaultDrawingEditor;
 import org.jhotdraw.draw.DefaultDrawingView;
-import org.jhotdraw.draw.Drawing;
 import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.QuadTreeDrawing;
-import static org.junit.Assert.assertEquals;
 
 /**
  *
- * @author Anni
  */
-public class ThenUserSeesUpdatedCanvasColor extends Stage<ThenUserSeesUpdatedCanvasColor>{
+public class GivenCanvas extends Stage<GivenCanvas> {
+            @ProvidedScenarioState
+    private DrawingEditor canvas;
     
-    private DrawingEditor canvas; 
-    private Drawing drawing;
-
-
-        @BeforeStage
+            @BeforeStage
     private void before() {
+    canvas = new DefaultDrawingEditor();
     DrawingView view = new DefaultDrawingView();
     view.setDrawing(new QuadTreeDrawing());
+    canvas.setActiveView(view);
     }
     
-    ThenUserSeesUpdatedCanvasColor TheUserCanEditTheCanvas() {
-    String result = "color";
-    String result2 = "color";
-    
-    assertEquals(result2, result);
-    return this; 
-}
+    GivenCanvas Drawing_View() {
+        canvas.getActiveView();
+        return this;
+} 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.jhotdraw.draw.action;
+package org.jhotdraw.draw.canvasColor;
 
 import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.BeforeStage;
@@ -23,7 +23,6 @@ import static org.junit.Assert.assertEquals;
 
 /**
  *
- * @author Anni
  */
 public class WhenCanvasChangeColor extends Stage<WhenCanvasChangeColor> {
         @ProvidedScenarioState
